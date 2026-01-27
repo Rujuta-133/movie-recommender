@@ -5,6 +5,3 @@ print("Number of movies: ", len(movies))
 print("Number of ratings: ", len(ratings))
 print("Sample movie[0] genres: ",movies[0]["genres"])
 
-print(counting_avg(movies[0]))
-print(get_movie_by_id(movies, 3))
-print(get_movie_by_id(movies, 25))
