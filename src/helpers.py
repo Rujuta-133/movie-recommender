@@ -40,3 +40,33 @@ def user_genre_preferences(user_ratings, movies, get_movie_by_id):
 
     return user_preferences
 
+
+def recommend_movies(user_preferences, movies, user_ratings):
+    recommendations = {}
+    for user_id, genre_prefs in user_preferences.items():
+        #top_genre = max(genre_prefs, key = genre_prefs.get)
+        sorted_genres = sorted(genre_prefs, key= lambda k: genre_prefs[k], reverse = True)
+        for genre in sorted_genres:
+            candidate_movies = []
+            for movie in movies:
+                already_watched = False
+                if genre in movie["genres"]:
+                    for rating in user_ratings[user_id]:
+                        if rating["movie_id"] == movie["movie_id"]:
+                            already_watched = True
+                            break
+                    if already_watched == False:
+                        candidate_movies.append(movie)
+            if len(candidate_movies) != 0:
+                break
+        candidate_movies.sort(key = lambda movie: movie["imdb_rating"], reverse=True)
+        top_movies = candidate_movies[:3]
+        recommendations[user_id] = top_movies
+    
+    return recommendations
+
+
+
+
+
+
