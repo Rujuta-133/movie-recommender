@@ -8,7 +8,12 @@ movies = [
     {"movie_id": 7, "title": "Interstellar", "genres": ["Sci-Fi"], "rating_sum": 20, "rating_count": 4, "year": 2014, "imdb_rating": 8.7},
     {"movie_id": 8, "title": "Batman Begins", "genres": ["Action", "Crime"], "rating_sum": 10, "rating_count": 2, "year": 2005, "imdb_rating": 8.2},
     {"movie_id": 9, "title": "The Holiday", "genres": ["Romance", "Comedy"], "rating_sum": 8, "rating_count": 3, "year": 2006, "imdb_rating": 7.0},
-    {"movie_id": 10, "title": "Jerry Maguire", "genres": ["Comedy"], "rating_sum": 14, "rating_count": 3, "year": 1996, "imdb_rating": 7.9}
+    {"movie_id": 10, "title": "Jerry Maguire", "genres": ["Comedy"], "rating_sum": 14, "rating_count": 3, "year": 1996, "imdb_rating": 7.9},
+    {"movie_id": 11, "title": "Materialists", "genres": ["Romance"], "rating_sum": 0, "rating_count": 0, "year": 2025, "imdb_rating": 6.3},
+    {"movie_id": 12, "title": "The Vow", "genres": ["Romance"], "rating_sum": 0, "rating_count": 0, "year": 2012, "imdb_rating": 6.8},
+    {"movie_id": 13, "title": "La La Land", "genres": ["Romance"], "rating_sum": 0, "rating_count": 0, "year": 2016, "imdb_rating": 8.0},
+    {"movie_id": 14, "title": "Ted", "genres": ["Comedy"], "rating_sum": 0, "rating_count": 0, "year": 2014, "imdb_rating": 6.9},
+    {"movie_id": 15, "title": "Hangover", "genres": ["Comedy"], "rating_sum": 0, "rating_count": 0, "year": 2015, "imdb_rating": 7.7}
 
 ]
 
