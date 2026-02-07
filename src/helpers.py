@@ -66,6 +66,28 @@ def recommend_movies(user_preferences, movies, user_ratings):
     return recommendations
 
 
+def create_training_dataset(ratings, movies, user_preferences, get_movie_by_id):
+    training_data = []
+    for rating in ratings:
+        user_id = rating["user_id"]
+        movie_id = rating["movie_id"]
+        movie = get_movie_by_id(movies, movie_id)
+        genres = movie["genres"]
+        user_genre_score = 0
+        for genre in genres:
+            user_genre_score += user_preferences[user_id].get(genre, 0)
+        if rating["rating_value"] >= 4:
+            liked = 1
+        else:
+            liked = 0
+        row = {"user_genre_score" : user_genre_score, "imdb_rating": movie["imdb_rating"], "rating_count": movie["rating_count"], "liked": liked}
+
+        training_data.append(row)
+    
+    return training_data
+
+
+
 
 
 
