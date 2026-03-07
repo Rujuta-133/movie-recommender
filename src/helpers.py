@@ -1,3 +1,5 @@
+import pandas as pd
+
 def counting_avg(movie):
     if movie["rating_count"] == 0.0:
         return 0.0
@@ -85,6 +87,53 @@ def create_training_dataset(ratings, movies, user_preferences, get_movie_by_id):
         training_data.append(row)
     
     return training_data
+
+def create_user_movie_features(user_id, movie, user_preferences):
+    user_genre_score = 0
+    genres = movie["genres"]
+    for genre in genres:
+        user_genre_score += user_preferences[user_id].get(genre, 0)
+    imdb_rating = movie["imdb_rating"]
+    rating_count = movie["rating_count"]
+
+    feature = {"user_genre_score" : user_genre_score, "imdb_rating": imdb_rating, "rating_count" : rating_count}
+
+    return feature
+
+def recommend_movies_ml(user_id, movies, model, user_preferences, user_ratings):
+    results = []
+    for movie in movies:
+        user_ratings_list = user_ratings[user_id]
+        
+        already_watched = False
+        for rating in user_ratings_list:
+            rated_movie_id = rating["movie_id"]
+            if rated_movie_id == movie["movie_id"]:
+                already_watched = True
+                break
+        if already_watched:
+            continue
+
+        features_dict = create_user_movie_features(user_id, movie, user_preferences)
+        features_df = pd.DataFrame([features_dict])
+        liked_probability = model.predict_proba(features_df)[0][1]
+        
+        results.append((movie["movie_id"], liked_probability)) 
+    
+    results.sort(key = lambda x: x[1], reverse=True)
+    top_movies = results[:3]
+
+    recommended_movies = []
+    for movie_id,probability in top_movies:
+        movie = get_movie_by_id(movies, movie_id)
+
+        if movie:
+            title = movie["title"]
+            recommended_movies.append((title, probability))
+        
+
+    return recommended_movies
+
 
 
 
